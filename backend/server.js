@@ -8,10 +8,9 @@ import messageRoutes from "./routes/message.routes.js";
 import userRoutes from "./routes/user.routes.js";
 
 import { connectDB } from "./db/connect.js";
+import { app, server } from "./socket/socket.js";
 
 const PORT = process.env.PORT || 3000;
-
-const app = express();
 
 app.use(express.json());
 app.use(cors("*"));
@@ -21,7 +20,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/messages", messageRoutes);
 app.use("/api/v1/users", userRoutes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectDB();
   console.log(`App listening on ${PORT}`);
 });

@@ -4,11 +4,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import MessageSkeleton from "../components/MessageSkeleton";
 import useConversation from "../zustand/useConversation";
+import { useListenMessages } from "../hooks/useListenMessages";
 
 const Messages = () => {
   const [loading, setLoading] = useState(false);
   const lastMessageRef = useRef();
   const { selectedConversation, messages, setMessages } = useConversation();
+  useListenMessages();
 
   useEffect(() => {
     const getMessages = async () => {
