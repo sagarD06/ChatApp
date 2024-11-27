@@ -4,7 +4,7 @@ import { User } from "../models/user.model.js";
 
 export const isUserAuthenticated = async (req, res, next) => {
   try {
-    const token = req.cookies.jwt;
+    const token = await req.cookies.jwt;
     if (!token) {
       return res
         .status(401)
@@ -29,9 +29,10 @@ export const isUserAuthenticated = async (req, res, next) => {
         });
     }
     req.user = user;
+    console.log(user)
     next();
   } catch (error) {
-    console.log("Something went wrong in uerAuth middleware.");
+    console.log("Something went wrong in userAuth middleware.");
     return res.status(500).json({ message: error.message, success: false });
   }
 };

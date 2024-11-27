@@ -52,7 +52,7 @@ export const signUpUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log("Error in signup controller");
+    console.log("Error in signup controller", error.message);
     return res.status(500).json({
       message: "Error while signing up user",
       success: false,
@@ -94,6 +94,7 @@ export const signInUser = async (req, res) => {
     }
 
     generateTokenAndSetCookie(user._id, res);
+    console.log("In signin")
     return res.status(200).json({
       message: "User signed in successfully",
       success: true,
